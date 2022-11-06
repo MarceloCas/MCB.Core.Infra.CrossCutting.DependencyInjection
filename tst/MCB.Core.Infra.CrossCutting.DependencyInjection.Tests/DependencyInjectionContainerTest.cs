@@ -573,8 +573,8 @@ public class DependencyInjectionContainerTest
                 dependencyInjectionContainer.RegisterScoped<IDummyService, DummyService>();
                 dependencyInjectionContainer.Register(
                     DependencyInjectionLifecycle.Singleton,
-                    concreteType: typeof(ConcreteService),
-                    concreteTypeFactory: dependencyInjectionContainer =>
+                    serviceType: typeof(ConcreteService),
+                    serviceTypeFactory: dependencyInjectionContainer =>
                     {
                         return new ConcreteService(dependencyInjectionContainer.Resolve<IDummyService>());
                     }
@@ -601,7 +601,7 @@ public class DependencyInjectionContainerTest
             {
                 dependencyInjectionContainer.RegisterScoped<IDummyService, DummyService>();
                 dependencyInjectionContainer.RegisterSingleton<ConcreteService>(
-                    concreteTypeFactory: dependencyInjectionContainer =>
+                    serviceTypeFactory: dependencyInjectionContainer =>
                     {
                         return new ConcreteService(dependencyInjectionContainer.Resolve<IDummyService>());
                     }
@@ -629,7 +629,7 @@ public class DependencyInjectionContainerTest
                 dependencyInjectionContainer.RegisterScoped<IDummyService, DummyService>();
                 dependencyInjectionContainer.Register(
                     DependencyInjectionLifecycle.Transient,
-                    concreteType: typeof(ConcreteService),
+                    serviceType: typeof(ConcreteService),
                     dependencyInjectionContainer =>
                     {
                         return new ConcreteService(dependencyInjectionContainer.Resolve<IDummyService>());
@@ -685,7 +685,7 @@ public class DependencyInjectionContainerTest
                 dependencyInjectionContainer.RegisterScoped<IDummyService, DummyService>();
                 dependencyInjectionContainer.Register(
                     DependencyInjectionLifecycle.Scoped,
-                    concreteType: typeof(ConcreteService),
+                    serviceType: typeof(ConcreteService),
                     dependencyInjectionContainer =>
                     {
                         return new ConcreteService(dependencyInjectionContainer.Resolve<IDummyService>());
@@ -793,9 +793,9 @@ public class DependencyInjectionContainerTest
 
         // Assert
         Assert.True(registrationCollection.Count == 3);
-        Assert.Contains(registrationCollection, q => q.DependencyInjectionLifecycle == DependencyInjectionLifecycle.Singleton && q.AbstractionType == typeof(ISingletonService) && q.ConcreteType == typeof(SingletonService));
-        Assert.Contains(registrationCollection, q => q.DependencyInjectionLifecycle == DependencyInjectionLifecycle.Transient && q.AbstractionType == typeof(ITransientService) && q.ConcreteType == typeof(TransientService));
-        Assert.Contains(registrationCollection, q => q.DependencyInjectionLifecycle == DependencyInjectionLifecycle.Scoped && q.AbstractionType == typeof(IScopedService) && q.ConcreteType == typeof(ScopedService));
+        Assert.Contains(registrationCollection, q => q.DependencyInjectionLifecycle == DependencyInjectionLifecycle.Singleton && q.ServiceType == typeof(ISingletonService) && q.ConcreteType == typeof(SingletonService));
+        Assert.Contains(registrationCollection, q => q.DependencyInjectionLifecycle == DependencyInjectionLifecycle.Transient && q.ServiceType == typeof(ITransientService) && q.ConcreteType == typeof(TransientService));
+        Assert.Contains(registrationCollection, q => q.DependencyInjectionLifecycle == DependencyInjectionLifecycle.Scoped && q.ServiceType == typeof(IScopedService) && q.ConcreteType == typeof(ScopedService));
     }
 
     [Fact]

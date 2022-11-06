@@ -258,7 +258,7 @@ public class DependencyInjectionContainer
     {
         foreach (var service in _serviceCollection)
             yield return new Registration(
-                abstractionType: service.ServiceType,
+                serviceType: service.ServiceType,
                 concreteType: service.ImplementationType,
                 dependencyInjectionLifecycle: ConvertToDependencyInjectionLifecycle(service.Lifetime)
             );
