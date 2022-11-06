@@ -745,7 +745,7 @@ public class DependencyInjectionContainerTest
         var dependencyInjectionContainer = new DependencyInjectionContainer(serviceCollection);
         dependencyInjectionContainer.Register(
             lifecycle: DependencyInjectionLifecycle.Singleton, 
-            abstractionType: typeof(IDummyService),
+            serviceType: typeof(IDummyService),
             concreteType: typeof(DummyService), 
             concreteTypeFactory: dependencyInjectionContainer => new InheritedDummyService()
         );
@@ -809,8 +809,8 @@ public class DependencyInjectionContainerTest
 
         dependencyInjectionContainer.Register(
             lifecycle: DependencyInjectionLifecycle.Singleton,
-            concreteType: typeof(InheritedDummyService),
-            concreteTypeFactory: dependencyInjectionContainer => null
+            serviceType: typeof(InheritedDummyService),
+            serviceTypeFactory: dependencyInjectionContainer => null
         );
 
         dependencyInjectionContainer.Build();
@@ -839,7 +839,7 @@ public class DependencyInjectionContainerTest
 
         dependencyInjectionContainer.Register<InheritedDummyService>(
             lifecycle: DependencyInjectionLifecycle.Singleton,
-            concreteTypeFactory: dependencyInjectionContainer => null
+            serviceTypeFactory: dependencyInjectionContainer => null
         );
 
         dependencyInjectionContainer.Build();
@@ -897,7 +897,7 @@ public class DependencyInjectionContainerTest
 
         dependencyInjectionContainer.Register(
             lifecycle: DependencyInjectionLifecycle.Singleton,
-            abstractionType: typeof(IDummyService),
+            serviceType: typeof(IDummyService),
             concreteType: typeof(InheritedDummyService),
             concreteTypeFactory: dependencyInjectionContainer => null
         );
@@ -924,7 +924,7 @@ public class DependencyInjectionContainerTest
         var serviceCollection = new ServiceCollection();
 
         var dependencyInjectionContainer = new DependencyInjectionContainer(serviceCollection);
-        dependencyInjectionContainer.Register(lifecycle: DependencyInjectionLifecycle.Singleton, concreteType: typeof(DummyService), concreteTypeFactory: null);
+        dependencyInjectionContainer.Register(lifecycle: DependencyInjectionLifecycle.Singleton, serviceType: typeof(DummyService), serviceTypeFactory: null);
 
         var expectedExceptionMessage = DependencyInjectionContainer.DEPENDENCY_INJECTION_CONTAINER_OBJECT_CANNOT_BE_NULL;
         var raisedExceptionMessage = string.Empty;
@@ -951,8 +951,8 @@ public class DependencyInjectionContainerTest
         var dependencyInjectionContainer = new DependencyInjectionContainer(serviceCollection);
         dependencyInjectionContainer.Register(
             lifecycle: DependencyInjectionLifecycle.Singleton, 
-            concreteType: typeof(DummyService), 
-            concreteTypeFactory: dependencyInjectionContainer => null
+            serviceType: typeof(DummyService), 
+            serviceTypeFactory: dependencyInjectionContainer => null
         );
 
         var expectedExceptionMessage = DependencyInjectionContainer.DEPENDENCY_INJECTION_CONTAINER_OBJECT_CANNOT_BE_NULL;

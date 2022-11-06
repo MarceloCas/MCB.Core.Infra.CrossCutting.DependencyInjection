@@ -80,24 +80,24 @@ public class DependencyInjectionContainer
         };
     }
 
-    public void Register(DependencyInjectionLifecycle lifecycle, Type concreteType)
+    public void Register(DependencyInjectionLifecycle lifecycle, Type serviceType)
     {
         _serviceCollection.Add(
             new ServiceDescriptor(
-                serviceType: concreteType,
-                implementationType: concreteType,
+                serviceType: serviceType,
+                implementationType: serviceType,
                 lifetime: ConvertToServiceLifetime(lifecycle)
             )
         );
     }
-    public void Register(DependencyInjectionLifecycle lifecycle, Type concreteType, Func<IDependencyInjectionContainer, object?> concreteTypeFactory)
+    public void Register(DependencyInjectionLifecycle lifecycle, Type serviceType, Func<IDependencyInjectionContainer, object?> serviceTypeFactory)
     {
         _serviceCollection.Add(
             new ServiceDescriptor(
-                serviceType: concreteType,
+                serviceType: serviceType,
                 factory: serviceProvider =>
                 {
-                    var concreteObject = concreteTypeFactory(this);
+                    var concreteObject = serviceTypeFactory(this);
 
                     if (concreteObject is null)
                         throw new InvalidOperationException(DEPENDENCY_INJECTION_CONTAINER_OBJECT_CANNOT_BE_NULL);
@@ -108,21 +108,21 @@ public class DependencyInjectionContainer
             )
         );
     }
-    public void Register(DependencyInjectionLifecycle lifecycle, Type abstractionType, Type concreteType)
+    public void Register(DependencyInjectionLifecycle lifecycle, Type serviceType, Type concreteType)
     {
         _serviceCollection.Add(
             new ServiceDescriptor(
-                serviceType: abstractionType,
+                serviceType: serviceType,
                 implementationType: concreteType,
                 lifetime: ConvertToServiceLifetime(lifecycle)
             )
         );
     }
-    public void Register(DependencyInjectionLifecycle lifecycle, Type abstractionType, Type concreteType, Func<IDependencyInjectionContainer, object?> concreteTypeFactory)
+    public void Register(DependencyInjectionLifecycle lifecycle, Type serviceType, Type concreteType, Func<IDependencyInjectionContainer, object?> concreteTypeFactory)
     {
         _serviceCollection.Add(
             new ServiceDescriptor(
-                serviceType: abstractionType,
+                serviceType: serviceType,
                 factory: serviceProvider =>
                 {
                     var concreteObject = concreteTypeFactory(this);
@@ -141,14 +141,14 @@ public class DependencyInjectionContainer
     {
         Register(lifecycle, typeof(TConcreteType));
     }
-    public void Register<TConcreteType>(DependencyInjectionLifecycle lifecycle, Func<IDependencyInjectionContainer, TConcreteType?> concreteTypeFactory)
+    public void Register<TConcreteType>(DependencyInjectionLifecycle lifecycle, Func<IDependencyInjectionContainer, TConcreteType?> serviceTypeFactory)
     {
         _serviceCollection.Add(
             new ServiceDescriptor(
                 serviceType: typeof(TConcreteType),
                 factory: serviceProvider =>
                 {
-                    var concreteObject = concreteTypeFactory(this);
+                    var concreteObject = serviceTypeFactory(this);
 
                     if (concreteObject is null)
                         throw new InvalidOperationException(DEPENDENCY_INJECTION_CONTAINER_OBJECT_CANNOT_BE_NULL);
@@ -192,9 +192,9 @@ public class DependencyInjectionContainer
     {
         Register<TConcreteType>(DependencyInjectionLifecycle.Scoped);
     }
-    public void RegisterScoped<TConcreteType>(Func<IDependencyInjectionContainer, TConcreteType?> concreteTypeFactory)
+    public void RegisterScoped<TConcreteType>(Func<IDependencyInjectionContainer, TConcreteType?> serviceTypeFactory)
     {
-        Register(DependencyInjectionLifecycle.Scoped, concreteTypeFactory);
+        Register(DependencyInjectionLifecycle.Scoped, serviceTypeFactory);
     }
     public void RegisterScoped<TAbstractionType, TConcreteType>()
     {
@@ -209,9 +209,9 @@ public class DependencyInjectionContainer
     {
         Register<TConcreteType>(DependencyInjectionLifecycle.Singleton);
     }
-    public void RegisterSingleton<TConcreteType>(Func<IDependencyInjectionContainer, TConcreteType?> concreteTypeFactory)
+    public void RegisterSingleton<TConcreteType>(Func<IDependencyInjectionContainer, TConcreteType?> serviceTypeFactory)
     {
-        Register(DependencyInjectionLifecycle.Singleton, concreteTypeFactory);
+        Register(DependencyInjectionLifecycle.Singleton, serviceTypeFactory);
     }
     public void RegisterSingleton<TAbstractionType, TConcreteType>()
     {
@@ -226,9 +226,9 @@ public class DependencyInjectionContainer
     {
         Register<TConcreteType>(DependencyInjectionLifecycle.Transient);
     }
-    public void RegisterTransient<TConcreteType>(Func<IDependencyInjectionContainer, TConcreteType?> concreteTypeFactory)
+    public void RegisterTransient<TConcreteType>(Func<IDependencyInjectionContainer, TConcreteType?> serviceTypeFactory)
     {
-        Register(DependencyInjectionLifecycle.Transient, concreteTypeFactory);
+        Register(DependencyInjectionLifecycle.Transient, serviceTypeFactory);
     }
     public void RegisterTransient<TAbstractionType, TConcreteType>()
     {
@@ -241,9 +241,9 @@ public class DependencyInjectionContainer
     #endregion
 
     #region [ Unregister ]
-    public void Unregister(Type concreteType)
+    public void Unregister(Type serviceType)
     {
-        var serviceDescriptor = _serviceCollection.FirstOrDefault(descriptor => descriptor.ServiceType == concreteType);
+        var serviceDescriptor = _serviceCollection.FirstOrDefault(descriptor => descriptor.ServiceType == serviceType);
 
         if (serviceDescriptor != null)
             _serviceCollection.Remove(serviceDescriptor);
