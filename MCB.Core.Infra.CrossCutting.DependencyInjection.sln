@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4318A9B0-9A29-4A58-9CE6-5BBFBB0C6CEA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tst", "tst", "{EB146635-6135-44C8-860E-558ADB593D79}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCB.Core.Infra.CrossCutting.DependencyInjection", "src\MCB.Core.Infra.CrossCutting.DependencyInjection\MCB.Core.Infra.CrossCutting.DependencyInjection.csproj", "{2D43DAD8-32CA-42C1-8325-613073A413CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCB.Core.Infra.CrossCutting.DependencyInjection.Tests", "tst\MCB.Core.Infra.CrossCutting.DependencyInjection.Tests\MCB.Core.Infra.CrossCutting.DependencyInjection.Tests.csproj", "{EF3C28D2-0F03-49CE-96DA-7004197D7B78}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9038723A-8C5B-471A-8A0E-9C9260E577AC}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build-and-test.yml = .github\workflows\build-and-test.yml
+		.github\workflows\pack-and-publish.yml = .github\workflows\pack-and-publish.yml
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D43DAD8-32CA-42C1-8325-613073A413CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D43DAD8-32CA-42C1-8325-613073A413CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D43DAD8-32CA-42C1-8325-613073A413CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D43DAD8-32CA-42C1-8325-613073A413CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF3C28D2-0F03-49CE-96DA-7004197D7B78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF3C28D2-0F03-49CE-96DA-7004197D7B78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF3C28D2-0F03-49CE-96DA-7004197D7B78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF3C28D2-0F03-49CE-96DA-7004197D7B78}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2D43DAD8-32CA-42C1-8325-613073A413CD} = {4318A9B0-9A29-4A58-9CE6-5BBFBB0C6CEA}
+		{EF3C28D2-0F03-49CE-96DA-7004197D7B78} = {EB146635-6135-44C8-860E-558ADB593D79}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3BCB8AB1-F737-4518-9179-9615B9882077}
+	EndGlobalSection
+EndGlobal
