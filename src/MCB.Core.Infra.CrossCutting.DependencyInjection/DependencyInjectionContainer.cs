@@ -24,9 +24,9 @@ public class DependencyInjectionContainer
     }
 
     // Public Methods
-    public DependencyInjectionContainer Build()
+    public DependencyInjectionContainer Build(IServiceProvider? serviceProvider = null)
     {
-        _rootServiceProvider = _serviceCollection.BuildServiceProvider();
+        _rootServiceProvider = serviceProvider ?? _serviceCollection.BuildServiceProvider();
         _currentServiceProvider = _rootServiceProvider;
         return this;
     }

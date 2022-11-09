@@ -1055,4 +1055,27 @@ public class DependencyInjectionContainerTest
         // Assert
         Assert.True(raisedException);
     }
+
+    [Fact]
+    public void DependencyInjectionContainer_Should_Resolve_With_Microsoft_IoC_Container()
+    {
+        // Arrange
+        var services = new ServiceCollection();
+        services.AddMcbDependencyInjection(
+            configureServicesAction: dependencyInjectionContainer =>
+            {
+                dependencyInjectionContainer.RegisterScoped<IDummyService, DummyService>();
+                dependencyInjectionContainer.RegisterTransient<ConcreteService>();
+            }
+        );
+        var serviceProvider = services.BuildServiceProvider();
+
+        // Act
+        var concreteServiceA = serviceProvider.GetService<ConcreteService>();
+        var concreteServiceB = serviceProvider.GetService<ConcreteService>();
+
+        // Assert
+        Assert.NotEqual(concreteServiceA, concreteServiceB);
+        Assert.NotEqual(concreteServiceA.Id, concreteServiceB.Id);
+    }
 }
