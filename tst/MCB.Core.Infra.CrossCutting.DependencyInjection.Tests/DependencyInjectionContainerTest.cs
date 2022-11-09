@@ -802,7 +802,7 @@ public class DependencyInjectionContainerTest
     public void DependencyInjectionContainer_Should_Not_Resolve_ConcreteType_With_Factory_Return_Null_Value()
     {
         // Arrange
-        var expectedExceptionMessage = DependencyInjectionContainer.DEPENDENCY_INJECTION_CONTAINER_OBJECT_CANNOT_BE_NULL;
+        var expectedExceptionMessage = string.Empty;
         var raisedExceptionMessage = string.Empty;
 
         var dependencyInjectionContainer = new DependencyInjectionContainer();
@@ -832,7 +832,7 @@ public class DependencyInjectionContainerTest
     public void DependencyInjectionContainer_Should_Not_Resolve_ConcreteType_With_Factory_Return_Null_Value_With_Generic()
     {
         // Arrange
-        var expectedExceptionMessage = DependencyInjectionContainer.DEPENDENCY_INJECTION_CONTAINER_OBJECT_CANNOT_BE_NULL;
+        var expectedExceptionMessage = string.Empty;
         var raisedExceptionMessage = string.Empty;
 
         var dependencyInjectionContainer = new DependencyInjectionContainer();
@@ -861,7 +861,7 @@ public class DependencyInjectionContainerTest
     public void DependencyInjectionContainer_Should_Not_Resolve_With_Factory_Return_Null_Value_With_Generic()
     {
         // Arrange
-        var expectedExceptionMessage = DependencyInjectionContainer.DEPENDENCY_INJECTION_CONTAINER_OBJECT_CANNOT_BE_NULL;
+        var expectedExceptionMessage = string.Empty;
         var raisedExceptionMessage = string.Empty;
 
         var dependencyInjectionContainer = new DependencyInjectionContainer();
@@ -890,7 +890,7 @@ public class DependencyInjectionContainerTest
     public void DependencyInjectionContainer_Should_Not_Resolve_With_Factory_Return_Null_Value()
     {
         // Arrange
-        var expectedExceptionMessage = DependencyInjectionContainer.DEPENDENCY_INJECTION_CONTAINER_OBJECT_CANNOT_BE_NULL;
+        var expectedExceptionMessage = string.Empty;
         var raisedExceptionMessage = string.Empty;
 
         var dependencyInjectionContainer = new DependencyInjectionContainer();
@@ -926,7 +926,7 @@ public class DependencyInjectionContainerTest
         var dependencyInjectionContainer = new DependencyInjectionContainer(serviceCollection);
         dependencyInjectionContainer.Register(lifecycle: DependencyInjectionLifecycle.Singleton, serviceType: typeof(DummyService), serviceTypeFactory: null);
 
-        var expectedExceptionMessage = DependencyInjectionContainer.DEPENDENCY_INJECTION_CONTAINER_OBJECT_CANNOT_BE_NULL;
+        var expectedExceptionMessage = DependencyInjectionContainer.ROOT_SERVICE_PROVIDER_CANNOT_BE_NULL;
         var raisedExceptionMessage = string.Empty;
 
         // Act
@@ -955,7 +955,7 @@ public class DependencyInjectionContainerTest
             serviceTypeFactory: dependencyInjectionContainer => null
         );
 
-        var expectedExceptionMessage = DependencyInjectionContainer.DEPENDENCY_INJECTION_CONTAINER_OBJECT_CANNOT_BE_NULL;
+        var expectedExceptionMessage = DependencyInjectionContainer.ROOT_SERVICE_PROVIDER_CANNOT_BE_NULL;
         var raisedExceptionMessage = string.Empty;
 
         // Act
@@ -977,7 +977,7 @@ public class DependencyInjectionContainerTest
         // Arrange
         var dependencyInjectionContainer = new DependencyInjectionContainer();
         var raisedExceptionMessage = string.Empty;
-        var expectedExceptionMessage = DependencyInjectionContainer.DEPENDENCY_INJECTION_CONTAINER_SHOULD_BUILD;
+        var expectedExceptionMessage = DependencyInjectionContainer.ROOT_SERVICE_PROVIDER_CANNOT_BE_NULL;
 
         // Act
         try
@@ -998,7 +998,7 @@ public class DependencyInjectionContainerTest
         // Arrange
         var dependencyInjectionContainer = new DependencyInjectionContainer();
         var raisedExceptionMessage = string.Empty;
-        var expectedExceptionMessage = DependencyInjectionContainer.DEPENDENCY_INJECTION_CONTAINER_SHOULD_BUILD;
+        var expectedExceptionMessage = DependencyInjectionContainer.CURRENT_SERVICE_PROVIDER_CANNOT_BE_NULL;
 
         // Act
         try
@@ -1019,7 +1019,7 @@ public class DependencyInjectionContainerTest
         // Arrange
         var dependencyInjectionContainer = new DependencyInjectionContainer();
         var raisedExceptionMessage = string.Empty;
-        var expectedExceptionMessage = DependencyInjectionContainer.DEPENDENCY_INJECTION_CONTAINER_SHOULD_BUILD;
+        var expectedExceptionMessage = DependencyInjectionContainer.ROOT_SERVICE_PROVIDER_CANNOT_BE_NULL;
 
         // Act
         try

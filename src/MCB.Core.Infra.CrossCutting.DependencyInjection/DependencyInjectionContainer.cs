@@ -9,8 +9,8 @@ public class DependencyInjectionContainer
     : IDependencyInjectionContainer
 {
     // Constants
-    public const string DEPENDENCY_INJECTION_CONTAINER_OBJECT_CANNOT_BE_NULL = nameof(DEPENDENCY_INJECTION_CONTAINER_OBJECT_CANNOT_BE_NULL);
-    public const string DEPENDENCY_INJECTION_CONTAINER_SHOULD_BUILD = nameof(DEPENDENCY_INJECTION_CONTAINER_OBJECT_CANNOT_BE_NULL);
+    public const string ROOT_SERVICE_PROVIDER_CANNOT_BE_NULL = "ROOT_SERVICE_PROVIDER_CANNOT_BE_NULL";
+    public const string CURRENT_SERVICE_PROVIDER_CANNOT_BE_NULL = "CURRENT_SERVICE_PROVIDER_CANNOT_BE_NULL";
 
     // Fields
     private readonly IServiceCollection _serviceCollection;
@@ -35,7 +35,7 @@ public class DependencyInjectionContainer
     public void CreateNewScope()
     {
         if (_rootServiceProvider is null)
-            throw new InvalidOperationException(DEPENDENCY_INJECTION_CONTAINER_SHOULD_BUILD);
+            throw new InvalidOperationException(ROOT_SERVICE_PROVIDER_CANNOT_BE_NULL);
 
         _currentServiceProvider = _rootServiceProvider.CreateScope().ServiceProvider;
     }
@@ -45,14 +45,14 @@ public class DependencyInjectionContainer
     public object? Resolve(Type type)
     {
         if (_currentServiceProvider is null)
-            throw new InvalidOperationException(DEPENDENCY_INJECTION_CONTAINER_SHOULD_BUILD);
+            throw new InvalidOperationException(CURRENT_SERVICE_PROVIDER_CANNOT_BE_NULL);
 
         return _currentServiceProvider.GetService(type);
     }
     public TType? Resolve<TType>()
     {
         if (_currentServiceProvider is null)
-            throw new InvalidOperationException(DEPENDENCY_INJECTION_CONTAINER_SHOULD_BUILD);
+            throw new InvalidOperationException(ROOT_SERVICE_PROVIDER_CANNOT_BE_NULL);
 
         return _currentServiceProvider.GetService<TType>();
     }
@@ -95,15 +95,7 @@ public class DependencyInjectionContainer
         _serviceCollection.Add(
             new ServiceDescriptor(
                 serviceType: serviceType,
-                factory: serviceProvider =>
-                {
-                    var concreteObject = serviceTypeFactory(this);
-
-                    if (concreteObject is null)
-                        throw new InvalidOperationException(DEPENDENCY_INJECTION_CONTAINER_OBJECT_CANNOT_BE_NULL);
-
-                    return concreteObject;
-                },
+                factory: serviceProvider => serviceTypeFactory(this)!,
                 lifetime: ConvertToServiceLifetime(lifecycle)
             )
         );
@@ -123,15 +115,7 @@ public class DependencyInjectionContainer
         _serviceCollection.Add(
             new ServiceDescriptor(
                 serviceType: serviceType,
-                factory: serviceProvider =>
-                {
-                    var concreteObject = concreteTypeFactory(this);
-
-                    if (concreteObject is null)
-                        throw new InvalidOperationException(DEPENDENCY_INJECTION_CONTAINER_OBJECT_CANNOT_BE_NULL);
-
-                    return concreteObject;
-                },
+                factory: serviceProvider => concreteTypeFactory(this)!,
                 lifetime: ConvertToServiceLifetime(lifecycle)
             )
         );
@@ -146,15 +130,7 @@ public class DependencyInjectionContainer
         _serviceCollection.Add(
             new ServiceDescriptor(
                 serviceType: typeof(TConcreteType),
-                factory: serviceProvider =>
-                {
-                    var concreteObject = serviceTypeFactory(this);
-
-                    if (concreteObject is null)
-                        throw new InvalidOperationException(DEPENDENCY_INJECTION_CONTAINER_OBJECT_CANNOT_BE_NULL);
-
-                    return concreteObject;
-                },
+                factory: serviceProvider => serviceTypeFactory(this)!,
                 lifetime: ConvertToServiceLifetime(lifecycle)
             )
         );
@@ -174,15 +150,7 @@ public class DependencyInjectionContainer
         _serviceCollection.Add(
             new ServiceDescriptor(
                 serviceType: typeof(TAbstractionType),
-                factory: serviceProvider =>
-                {
-                    var concreteObject = concreteTypeFactory(this);
-
-                    if (concreteObject is null)
-                        throw new InvalidOperationException(DEPENDENCY_INJECTION_CONTAINER_OBJECT_CANNOT_BE_NULL);
-
-                    return concreteObject;
-                },
+                factory: serviceProvider => concreteTypeFactory(this)!,
                 lifetime: ConvertToServiceLifetime(lifecycle)
             )
         );
